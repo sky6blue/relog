@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  relog-backend:
+    container_name: ${APP_NAME}-backend
+    restart: always
+    build: ./build
+    volumes:
+      - ./src:/var/www/backend/src
+    working_dir: /var/www/backend
+    ports:
+      - "3016:3000"
+    links:
+      - relog-backend-mongo
+    depends_on:
+      - relog-backend-mongo
+    networks:
+      - network
+
+  relog-backend-mongo:
+    image: "mongo"
+    container_name: ${APP_NAME}-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_ADMIN_PASSWORD}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_ADMIN_LOGIN}
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge
