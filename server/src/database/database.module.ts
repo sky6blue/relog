@@ -8,6 +8,7 @@ import { Db, MongoClient } from 'mongodb';
       provide: DatabaseToken,
       useFactory: async (): Promise<Db> => {
         try {
+          console.log('connect to mongo');
           const cl = await MongoClient.connect(
             'mongodb+srv://nik:ybrbnf98@cluster0.ghf666u.mongodb.net/?retryWrites=true&w=majority',
           );
