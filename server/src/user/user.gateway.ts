@@ -1,19 +1,26 @@
 import {
   ConnectedSocket,
+  OnGatewayConnection,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 
-@WebSocketGateway(80, { cors: { origin: '*' }, namespace: 'user' })
-export class UserGateway {
+@WebSocketGateway(8000, {
+  cors: { origin: '*' },
+  namespace: 'user',
+})
+export class UserGateway implements OnGatewayConnection {
   @WebSocketServer()
   private server: Server;
 
   @SubscribeMessage('event')
-  handleEvent(@ConnectedSocket() socket: Socket) {
-    console.log(socket.handshake);
+  async handleEvent(@ConnectedSocket() socket: Socket) {
     console.log('ev handled');
+  }
+
+  handleConnection(client: Socket): any {
+    console.log('once');
   }
 }

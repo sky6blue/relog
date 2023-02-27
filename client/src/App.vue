@@ -5,7 +5,7 @@ import TheAside from "./components/layout/TheAside.vue";
 import TheMain from "./components/layout/TheMain.vue";
 
 
-const sock = io('http://localhost:80/user', {
+const sock = io('http://localhost:8000/user', {
   auth: {
     username: 'asd'
   }

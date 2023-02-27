@@ -1,12 +1,20 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { DatabaseToken } from '../database/database.constants';
-import { Db } from 'mongodb';
+import { Collection, Db } from 'mongodb';
+
+const UserCollectionName = 'user';
 
 @Injectable()
 export class UserRepository {
-  constructor(@Inject(DatabaseToken) private db: Db) {}
+  private coll: Collection;
+
+  constructor(@Inject(DatabaseToken) private db: Db) {
+    this.coll = this.db.collection(UserCollectionName);
+  }
 
   async save() {}
 
-  async findOne() {}
+  async findById() {}
+
+  async findByEmail() {}
 }
