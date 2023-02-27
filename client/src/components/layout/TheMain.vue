@@ -1,7 +1,13 @@
+<script lang="ts" setup>
+
+import TheRegister from "../auth/TheRegister.vue";</script>
+
 <template>
   <el-main>
     <el-scrollbar>
-      Main
+      <el-card>
+        <the-register />
+      </el-card>
     </el-scrollbar>
   </el-main>
 </template>
